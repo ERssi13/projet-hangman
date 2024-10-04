@@ -16,11 +16,16 @@ func RevelerLettres(mot string, nbLettres int) []rune {
 		for {
 			index = rand.Intn(len(mot))
 			if !indicesDejaReveles[index] {
-				indicesDejaReveles[index] = true
+				lettre := rune(mot[index])
+				for j, c := range mot {
+					if rune(c) == lettre {
+						lettresDevinees[j] = lettre
+						indicesDejaReveles[j] = true
+					}
+				}
 				break
 			}
 		}
-		lettresDevinees[index] = rune(mot[index])
 	}
 	return lettresDevinees
 }
