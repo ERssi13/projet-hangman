@@ -5,13 +5,15 @@ import (
 	"strings"
 )
 
-func Jouer(mot string, nbEssais int, nbLettresDévoilées int) {
+func Jouer(mot string, nbEssais int, nbLettresDévoilées int, fichierPendu string, niveau string) {
+	mot = strings.ToLower(mot)
 	lettresDevinees := RevelerLettres(mot, nbLettresDévoilées)
 	essaisRestants := nbEssais
 	lettresProposees := map[rune]bool{}
 
 	for essaisRestants > 0 {
 		ClearTerminal()
+	
 		AfficherEtat(lettresDevinees, essaisRestants)
 
 		var proposition string
@@ -22,6 +24,10 @@ func Jouer(mot string, nbEssais int, nbLettresDévoilées int) {
 			fmt.Println("Vous devez entrer une lettre ou un mot.")
 			continue
 		}
+
+		proposition = strings.ReplaceAll(proposition, " ", "")
+
+		proposition = strings.ToLower(proposition)
 
 		if len(proposition) > 1 { 
 			if proposition == mot {
