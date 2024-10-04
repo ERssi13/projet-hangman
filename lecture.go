@@ -26,7 +26,7 @@ func LireFichier(fichier string) ([]string, error) {
 	return mots, nil
 }
 func MotAleatoire(mots []string) string {
-	src := rand.NewSource(time.Now().UnixNano())
-	r := rand.New(src)
-	return mots[r.Intn(len(mots))]
+	var index = 0
+	index = (index + 1) % len(mots)
+	return mots[index]
 }
